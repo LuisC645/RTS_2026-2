@@ -2,11 +2,9 @@ CC = gcc
 CFLAGS1 = -g -Og -std=gnu99
 CFLAGS2 = -ggdb3 -O0 
 
-
-SOURCE1 = fibonacci2026_v1.c
-SOURCE2 = fibonacci2026_v2.c
-
-
+SOURCE1 = ex1.c 
+SOURCE2 = memoryleak.c
+SOURCE3 = fibonacci_2025.c
 SOURCE4 = prueba.c
 
 all: ex1 memoryleak fibonacci prueba

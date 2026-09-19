@@ -5,9 +5,12 @@
 CC = gcc
 CFLAGS = -Wall -g 
 
-PROGS = example8_periodic-process example9_periodic-task example10_periodic-threads example11_periodic-task
+PROGS = example7_timer_create example8_periodic-process example9_periodic-task example10_periodic-threads example11_periodic-task
 
 all: $(PROGS)
+
+example7_timer_create: example7_timer_create.c
+	$(CC) $(CFLAGS) -o $@ $^
 
 example8_periodic-process: example8_periodic-process.c
 	$(CC) $(CFLAGS) -o $@ $^

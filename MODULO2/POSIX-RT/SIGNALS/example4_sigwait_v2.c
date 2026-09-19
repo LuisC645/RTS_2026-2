@@ -17,7 +17,6 @@
 /*************************************************/
 
 
-#include <unistd.h>
 #include <signal.h>
 #include <stdio.h>
 #include <errno.h>
@@ -37,7 +36,7 @@ int main() {
 
   sigprocmask( SIG_BLOCK, &set, NULL ); // Lo que hace SIG_BLOCK es bloquear la ejecuciòn del handler de la señal.
 
-  printf("\nWaiting for a Real-Time Signal... This process has id: %d \n", getpid());
+  printf("\nWaiting for a Real-Time Signal...\n");
 
   ret_val = sigwait(&set, &sig); // La señal que se reciba dejara de estar "pending" de entregarse, pero seguirà bloqueada.
 

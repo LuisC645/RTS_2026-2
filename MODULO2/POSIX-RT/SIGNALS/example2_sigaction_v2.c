@@ -5,14 +5,6 @@
 //      - Medellin, Colombia 2026 -
 /*************************************************/
 
-
-/******************************************************/
-//    System Calls, Signals and Signal's Handlers       
-//												      
-// Use this code at the same time you rum htop to kill
-// the process created here.
-/******************************************************/
-
 #include <unistd.h>
 #include <signal.h>
 #include <stdio.h>

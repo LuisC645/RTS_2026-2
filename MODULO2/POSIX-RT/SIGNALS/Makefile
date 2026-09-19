@@ -1,11 +1,11 @@
 # Makefile to compile the signal and timer examples
 # Written by Gustavo Patino
-# UdeA - Sept/2023
+# UdeA - Sept/2026
 
 CC = gcc
 CFLAGS = -Wall -g 
 
-PROGS = example1_signal example2_sigaction example4_sigwait example5_gettimeofday example6_timer_create
+PROGS = example1_signal example2_sigaction example4_sigwait example5_gettimeofday 
 
 all: $(PROGS)
 
@@ -21,12 +21,8 @@ example4_sigwait: example4_sigwait_v2.c
 example5_gettimeofday: example5_gettimeofday.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-example6_timer_create:  example6_timer_create.c
-	$(CC) $(CFLAGS) -o $@ $^	
-
 
 clean:
 	rm -f *.o
 	rm -f $(PROGS)
-	rm -f *.txt
 	

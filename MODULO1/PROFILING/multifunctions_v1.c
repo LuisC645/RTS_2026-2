@@ -1,13 +1,15 @@
- #include <stdlib.h>
+ #include <stdio.h>
+#include <stdlib.h>
+
  
  void g(void)
  {
-    malloc(4000);
+    int *x = (int *)malloc(4000);    
  }
  
  void f(void)
  {
-    malloc(2000);
+    int *y = (int *)malloc(2000);
     g();
 }
 

@@ -2,32 +2,41 @@ CC = gcc
 CFLAGS1 = -g -Og -std=gnu99
 CFLAGS2 = -ggdb3 -O0 
 
-SOURCE1 = ex1.c 
-SOURCE2 = memoryleak.c
-SOURCE3 = fibonacci_2025.c
-SOURCE4 = prueba.c
+SOURCE1 = AllocMemory.c
+SOURCE2 = fibonacci2026_v1.c
+SOURCE3 = fibonacci2026_v2.c
+SOURCE4 = multifunctions_v1.c
+SOURCE5 = multifunctions_v2.c
+SOURCE6 = multifunctions_v3.c
 
-all: ex1 memoryleak fibonacci prueba
+all: AllocMemory fibonacci2026_v1 fibonacci2026_v2 multifunctions_v1 multifunctions_v2 multifunctions_v3
 
 
-ex1: $(SOURCE1)
+AllocMemory: $(SOURCE1)
 	$(CC) $(CFLAGS2) $(SOURCE1) -o $@
 
-memoryleak: $(SOURCE2)
+fibonacci2026_v1: $(SOURCE2)
 	$(CC) $(CFLAGS2) $(SOURCE2) -o $@
 
-fibonacci: $(SOURCE3)
+fibonacci2026_v2: $(SOURCE3)
 	$(CC) $(CFLAGS2) $(SOURCE3) -o $@
 
-prueba: $(SOURCE4)
+multifunctions_v1: $(SOURCE4)
 	$(CC) $(CFLAGS2) $(SOURCE4) -o $@
 
+multifunctions_v2: $(SOURCE5)
+	$(CC) $(CFLAGS2) $(SOURCE5) -o $@
 
-valgrind: ex1 memoryleak fibonacci prueba
-	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./ex1
-	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./memoryleak
-	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./fibonacci
-	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./prueba
+multifunctions_v3: $(SOURCE6)
+	$(CC) $(CFLAGS2) $(SOURCE6) -o $@
+
+valgrind: AllocMemory fibonacci2026_v1 fibonacci2026_v2 multifunctions_v1 multifunctions_v2 multifunctions_v3
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./AllocMemory
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./fibonacci2026_v1
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./fibonacci2026_v2
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./multifunctions_v1
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./multifunctions_v2
+	valgrind --tool=callgrind --dump-instr=yes --instr-atstart=no ./multifunctions_v3
 
 clean:
-	$(RM) ex1 memoryleak fibonacci prueba *.out*
+	$(RM) AllocMemory fibonacci2026_v1 fibonacci2026_v2 multifunctions_v1 multifunctions_v2 multifunctions_v3 *.out*

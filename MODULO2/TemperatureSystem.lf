@@ -1,0 +1,55 @@
+target C;
+
+preamble {=
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <time.h>
+=}
+
+reactor Sensor {
+  output temp: int;
+  // periodic timer: offset 0, period 1 second
+  timer t(0, 1 sec);
+
+  reaction(startup) {=
+    srand(time(NULL));
+    printf("Sensor initialized.\n");
+  =}
+
+  reaction(t) -> temp {=
+    int value = 25 + rand() % 15;  // 25..39
+    printf("Sensor reading: %d°C\n", value);
+    lf_set(temp, value);
+  =}
+}
+
+reactor Monitor {
+  input temp: int;
+  output alert: string;
+
+  reaction(temp) -> alert {=
+    if (temp->value > 35) {
+      printf("Monitor: Overheat detected! (%d°C)\n", temp->value);
+      lf_set(alert, "OVERHEAT");
+    } else {
+      printf("Monitor: Temperature OK (%d°C)\n", temp->value);
+    }
+  =}
+}
+
+reactor Alarm {
+  input alert: string;
+
+  reaction(alert) {=
+    printf("ALARM: %s\n", alert->value);
+  =}
+}
+
+main reactor TemperatureSystem {
+  s = new Sensor();
+  m = new Monitor();
+  a = new Alarm();
+
+  s.temp -> m.temp;
+  m.alert -> a.alert;
+}
